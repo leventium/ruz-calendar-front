@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 function handleResponce(res) {
-    console.log(res.data)
+    return res.data.link
 }
 
 

@@ -1,8 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import LinkGetter from './LinkGetter';
+import sendRequest from './RequestSender';
+import DisplayLink from './DisplayLink';
 
 
 function App() {
+  const [link, setLink] = useState("")
+  
+  function setLinkFromRequest(type, name, group) {
+    setLink(sendRequest(type, name, group))
+  }
+  
   return (
     <>
       <div className="container-fluid p-5 bg-primary text-white text-center">
@@ -10,7 +19,11 @@ function App() {
         <p>Импортируйте расписание из РУЗ в удобный для Вас календарь!</p>
       </div>
       <div className="container p-5 my-5 border">
-        <LinkGetter/>
+        {link !== "" ?
+          <DisplayLink link={link}/>
+        :
+          <LinkGetter callback={setLinkFromRequest}/>
+        }
       </div>
     </>
   );

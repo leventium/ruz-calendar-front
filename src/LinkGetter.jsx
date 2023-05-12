@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from "react";
-import sendRequest from "./RequestSender";
 
 
-export default function LinkGetter() {
+export default function LinkGetter({callback}) {
     const [value, setValue] = useState({
       name: "",
       userType: "Студент",
@@ -35,7 +34,7 @@ export default function LinkGetter() {
             <option>Группа</option>
           </select>
         </div>
-        {value.userType !== "Группа"?
+        {value.userType !== "Группа" ?
             <div className="mb-3 mt-3">
             <label htmlFor="name" className="form-label">
                 Имя:
@@ -52,7 +51,7 @@ export default function LinkGetter() {
             :
             <></>
         }
-        {value.userType !== "Преподаватель"?
+        {value.userType !== "Преподаватель" ?
             <div className="mb-3">
             <label htmlFor="group" className="form-label">
                 Группа:
@@ -69,7 +68,15 @@ export default function LinkGetter() {
             :
             <></>
         }
-        <button type="button" className="btn btn-primary" onClick={sendRequest}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={
+            () => {
+              callback(value.userType, value.name, value.group)
+            }
+          }
+        >
           Отправить
         </button>
       </form>
