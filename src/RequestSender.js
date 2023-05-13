@@ -1,17 +1,7 @@
 import axios from "axios";
 
 
-function handleResponce(res) {
-    return res.data.link
-}
-
-
-function catchError(err) {
-    console.log(err)
-}
-
-
-export default function sendRequest(type, name, group) {
+export default function sendRequest(type, name, group, putLink) {
     const client = axios.create({
       baseURL: "http://localhost:8000/api/link",
       timeout: 3000
@@ -24,8 +14,7 @@ export default function sendRequest(type, name, group) {
             group: group
           }
         })
-        .then(handleResponce)
-        .catch(catchError)
+        .then(putLink)
         break;
       case "Преподаватель":
         client.get("/teacher", {
@@ -33,8 +22,7 @@ export default function sendRequest(type, name, group) {
             name: name
           }
         })
-        .then(handleResponce)
-        .catch(catchError)
+        .then(putLink)
         break;
       case "Группа":
         client.get("/group", {
@@ -42,8 +30,7 @@ export default function sendRequest(type, name, group) {
             group: group
           }
         })
-        .then(handleResponce)
-        .catch(catchError)
+        .then(putLink)
         break;
       default:
         console.log(`${name} - ${type} - ${group}`)

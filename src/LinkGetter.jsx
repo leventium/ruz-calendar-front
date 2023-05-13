@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from "react";
 
 
-export default function LinkGetter({callback}) {
+export default function LinkGetter({callback, putLink}) {
     const [value, setValue] = useState({
       name: "",
       userType: "Студент",
@@ -73,7 +73,7 @@ export default function LinkGetter({callback}) {
           className="btn btn-primary"
           onClick={
             () => {
-              callback(value.userType, value.name, value.group)
+              callback(value.userType, value.name, value.group, putLink)
             }
           }
         >

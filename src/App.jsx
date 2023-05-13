@@ -8,8 +8,8 @@ import DisplayLink from './DisplayLink';
 function App() {
   const [link, setLink] = useState("")
   
-  function setLinkFromRequest(type, name, group) {
-    setLink(sendRequest(type, name, group))
+  function putLink(res) {
+    setLink(res.data.link)
   }
   
   return (
@@ -22,7 +22,7 @@ function App() {
         {link !== "" ?
           <DisplayLink link={link}/>
         :
-          <LinkGetter callback={setLinkFromRequest}/>
+          <LinkGetter callback={sendRequest} putLink={putLink}/>
         }
       </div>
     </>
